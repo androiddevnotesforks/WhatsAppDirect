@@ -44,6 +44,7 @@ android {
 dependencies {
 
     implementation(projects.countriesRepository)
+    implementation(projects.whatsAppDirect.core)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

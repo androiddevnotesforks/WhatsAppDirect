@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Pressed State: when the button is pressed -->
+    <item android:state_pressed="true">
+        <!-- Ripple effect for pressed state -->
+        <ripple android:color="?attr/colorControlHighlight">
+            <item>
+                <shape>
+                    <solid android:color="?android:colorPrimary" /> <!-- Background color for pressed state -->
+                    <corners android:radius="12dp" /> <!-- Rounded corners -->
+                </shape>
+            </item>
+        </ripple>
+    </item>
+
+    <!-- Focused State: when the button is focused -->
+    <item android:state_focused="true">
+        <!-- Ripple effect for focused state -->
+        <ripple android:color="?attr/colorControlHighlight">
+            <item>
+                <shape>
+                    <solid android:color="?attr/colorSecondary" /> <!-- Background color for focused state -->
+                    <corners android:radius="12dp" /> <!-- Rounded corners -->
+                </shape>
+            </item>
+        </ripple>
+    </item>
+
+    <!-- Default State: when the button is in its normal state -->
+    <item>
+        <!-- Ripple effect for default state -->
+        <ripple android:color="?attr/colorControlHighlight">
+            <item>
+                <shape>
+                    <solid android:color="?attr/colorSecondary" /> <!-- Background color for default state -->
+                    <corners android:radius="12dp" /> <!-- Rounded corners -->
+                </shape>
+            </item>
+        </ripple>
+    </item>
+
+</selector>

@@ -25,4 +25,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "WhatsAppDirect"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-include(":app", ":countries_repository")
+include(":app")
+include(":countries_repository")
+include(":core")
+include(":app-lite")
