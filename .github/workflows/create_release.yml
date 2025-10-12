@@ -29,9 +29,12 @@ jobs:
       # Step 3: Decode Keystore from GitHub Secrets and Save
       - name: Decode Keystore from GitHub Secrets and Save
         run: |
-          echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
+          echo "$KEYSTORE_BASE64" | base64 --decode > key_store.jks
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
       # Step 4: Build APK for "app" module
       - name: Build APK for WhatsApp Direct
