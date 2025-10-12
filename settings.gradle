@@ -1,3 +1,0 @@
-include ':countries_repository'
-include ':app'
-rootProject.name = "WhatsApp Direct"

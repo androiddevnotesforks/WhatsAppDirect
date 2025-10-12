@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTheme">
+        <!-- Outline color for EditText and Button -->
+        <attr name="outlineColor" format="color" />
+        <attr name="outlineColorFocused" format="color" />
+        <attr name="outlineColorPressed" format="color" />
+
+        <!-- Background color for EditText and Button -->
+        <attr name="backgroundColor" format="color" />
+        <attr name="colorSecondary" format="color" />
+
+        <!-- Text color -->
+        <attr name="textColor" format="color" />
+        <attr name="colorSurface" format="color" />
+        <attr name="colorOnSurface" format="color" />
+        <attr name="colorControlHighlight" format="color" />
+    </declare-styleable>
+</resources>

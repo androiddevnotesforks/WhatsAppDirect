@@ -1,11 +1,10 @@
 package com.devtech.countries_repository
 
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Locale
 
 object CountriesRepository {
 
-    private val arrayList: ArrayList<Country> = ArrayList<Country>()
+    private val arrayList: ArrayList<Country> = ArrayList()
 
     init {
         setArrayListWithID()
@@ -14,7 +13,7 @@ object CountriesRepository {
     fun getAllCountries() = arrayList
 
     fun getCountryList(query: String): List<Country> = arrayList.filter { country ->
-        country.name.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))
+        country.name.lowercase(Locale.ROOT).contains(query.lowercase(Locale.ROOT))
                 || country.numericCode.toString() == query
     }
 

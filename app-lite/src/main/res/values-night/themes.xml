@@ -1,0 +1,29 @@
+<resources>
+
+    <style name="Theme.WhatsAppDirect" parent="android:Theme.Material.Light.DarkActionBar">
+
+        <item name="outlineColor">#BB86FC</item>
+        <item name="android:textColorHint">#7D7395</item>
+
+        <item name="outlineColorPressed">#03A9F4</item>
+        <item name="outlineColorFocused">#FF4081</item>
+        <item name="android:colorPrimary">#6200EE</item>
+        <item name="colorSecondary">#5407C5</item>
+        <item name="colorSurface">#121212</item>
+        <item name="colorControlHighlight">#A978F0</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="textColor">#FFFFFF</item>
+        <item name="android:actionBarTheme">@style/Theme.ActionBarStyle</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="backgroundColor">@color/black</item>
+        <item name="android:background">@color/black</item>
+    </style>
+
+
+    <style name="Theme.ActionBarStyle" parent="android:ThemeOverlay.Material.Dark.ActionBar">
+        <item name="android:colorPrimary">?backgroundColor</item>
+        <item name="android:textColorPrimary">?colorOnSurface</item>
+    </style>
+
+
+</resources>

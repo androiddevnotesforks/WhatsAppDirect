@@ -1,0 +1,52 @@
+<resources>
+
+    <style name="Theme.WhatsAppDirect" parent="android:Theme.Material.Light.DarkActionBar">
+
+        <item name="outlineColor">#D7C0F4</item>
+        <item name="android:textColorHint">#7D7395</item>
+
+        <item name="backgroundColor">#FFFFFF</item>
+        <item name="textColor">#000000</item>
+
+        <item name="outlineColorPressed">#03A9F4</item>
+        <item name="outlineColorFocused">#FF4081</item>
+        <item name="android:colorPrimary">#6200EE</item>
+        <item name="colorSecondary">#5407C5</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+        <item name="colorControlHighlight">#A978F0</item>
+
+        <item name="android:actionBarTheme">@style/Theme.ActionBarStyle</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+    </style>
+
+    <style name="Theme.ActionBarStyle" parent="android:ThemeOverlay.Material.ActionBar">
+        <item name="android:colorPrimary">@android:color/transparent</item>
+        <item name="android:textColorPrimary">?colorOnSurface</item>
+    </style>
+
+
+    <style name="CustomEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">?textColor</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/edittext_background</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="CustomButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/button_background</item>
+    </style>
+
+
+</resources>
