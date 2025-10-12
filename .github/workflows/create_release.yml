@@ -1,0 +1,62 @@
+name: Build and Release APK
+
+# Trigger the workflow on pushing a tag or manually
+on:
+  push:
+    branches:
+      - main
+  tag:
+    # Trigger the workflow when a tag is created
+    # Example: v1.0.0
+    pattern: 'v*'
+  workflow_dispatch: # This allows manual triggers via GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up JDK 8
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      # Step 3: Decode Keystore from GitHub Secrets and Save
+      - name: Decode Keystore from GitHub Secrets and Save
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+
+      # Step 4: Build APK for "app" module
+      - name: Build APK for WhatsApp Direct
+        run: |
+          ./gradlew :app:assembleRelease
+          mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/WhatsApp_Direct.apk
+
+      # Step 5: Build APK for "app-lite" module
+      - name: Build APK for WhatsApp Direct Lite
+        run: |
+          ./gradlew :app-lite:assembleRelease
+          mv app-lite/build/outputs/apk/release/app-lite-release.apk app-lite/build/outputs/apk/release/WhatsApp_Direct_Lite.apk
+
+      # Step 6: Create GitHub Release and Upload the APKs
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            app/build/outputs/apk/release/WhatsApp_Direct.apk
+            app-lite/build/outputs/apk/release/WhatsApp_Direct_Lite.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 7: Clean up keystore file
+      - name: Clean up keystore file
+        run: |
+          rm -f keystore.jks
