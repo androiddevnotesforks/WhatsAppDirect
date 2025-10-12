@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WhatAppDirect Lite</string>
     <string name="enter_message">Message (optional)</string>
-    <string name="enter_phone_number">Phone number</string>
+    <string name="enter_phone_number">Phone number (91 xxxxx xxxxx)</string>
     <string name="launch_whatsapp">Launch WhatsApp</string>
+    <string name="country_code_tip">Add country code (e.g., +91) at the beginning of the phone number</string>
 </resources>

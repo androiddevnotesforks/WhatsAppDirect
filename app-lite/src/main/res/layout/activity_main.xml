@@ -24,6 +24,17 @@
             android:inputType="phone"
             android:padding="10dp" />
 
+        <!-- Tip Text -->
+        <TextView
+            android:id="@+id/phoneNumberTipText"
+            android:layout_marginTop="8dp"
+            android:text="@string/country_code_tip"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
         <!-- Message Input -->
         <EditText
             android:id="@+id/messageEditText"
