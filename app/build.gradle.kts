@@ -1,6 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+}
+
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+fun getEnvOrLocal(key: String): String? {
+    return System.getenv(key) ?: localProperties[key]?.toString()
 }
 
 android {
@@ -20,9 +32,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../keystore.jks")
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
+            storePassword = getEnvOrLocal("KEYSTORE_PASSWORD")
+            keyAlias = getEnvOrLocal("KEY_ALIAS")
+            keyPassword = getEnvOrLocal("KEY_PASSWORD")
         }
     }
 
@@ -49,7 +61,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
 }
 
 dependencies {

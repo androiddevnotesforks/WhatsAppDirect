@@ -5,10 +5,10 @@ on:
   push:
     branches:
       - main
-  tag:
-    # Trigger the workflow when a tag is created
-    # Example: v1.0.0
-    pattern: 'v*'
+    tag:
+      # Trigger the workflow when a tag is created
+      # Example: v1.0.0
+      - 'v*'
   workflow_dispatch: # This allows manual triggers via GitHub UI
 
 jobs:
@@ -25,6 +25,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 17
+          distribution: 'adopt'
 
       # Step 3: Decode Keystore from GitHub Secrets and Save
       - name: Decode Keystore from GitHub Secrets and Save
@@ -33,17 +34,28 @@ jobs:
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       # Step 4: Build APK for "app" module
       - name: Build APK for WhatsApp Direct
         run: |
           ./gradlew :app:assembleRelease
           mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/WhatsApp_Direct.apk
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}  # Pass the secret as environment variables
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}  # Pass the secret as environment variables
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}  # Pass the secret as environment variables
 
       # Step 5: Build APK for "app-lite" module
       - name: Build APK for WhatsApp Direct Lite
         run: |
           ./gradlew :app-lite:assembleRelease
           mv app-lite/build/outputs/apk/release/app-lite-release.apk app-lite/build/outputs/apk/release/WhatsApp_Direct_Lite.apk
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}  # Pass the secret as environment variables
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}  # Pass the secret as environment variables
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}  # Pass the secret as environment variables
 
       # Step 6: Create GitHub Release and Upload the APKs
       - name: Create GitHub Release
@@ -53,6 +65,10 @@ jobs:
           files: |
             app/build/outputs/apk/release/WhatsApp_Direct.apk
             app-lite/build/outputs/apk/release/WhatsApp_Direct_Lite.apk
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
