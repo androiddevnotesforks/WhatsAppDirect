@@ -4,9 +4,8 @@ name: Build and Release APK
 on:
   push:
     branches:
-      - main
-    tag:
-      # Trigger the workflow when a tag is created
+      - master
+    tags:
       # Example: v1.0.0
       - 'v*'
   workflow_dispatch: # This allows manual triggers via GitHub UI
@@ -60,17 +59,34 @@ jobs:
       # Step 6: Create GitHub Release and Upload the APKs
       - name: Create GitHub Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: |
-            app/build/outputs/apk/release/WhatsApp_Direct.apk
-            app-lite/build/outputs/apk/release/WhatsApp_Direct_Lite.apk
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           draft: true
           prerelease: false
+
+      - name: Upload WhatsApp Direct App 🚀
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/release/WhatsApp_Direct.apk
+          asset_name: WhatsApp_Direct.apk
+          asset_content_type: application/apk
+
+      - name: Upload WhatsApp Direct Lite App 🚀
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app-lite/build/outputs/apk/release/WhatsApp_Direct_Lite.apk
+          asset_name: WhatsApp_Direct_Lite.apk
+          asset_content_type: application/apk
 
       # Step 7: Clean up keystore file
       - name: Clean up keystore file
